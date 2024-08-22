@@ -91,6 +91,7 @@ Commit your code to your personal git and share the link with us.
 
   1. Application Modal
 
+<img width="1679" alt="image" src="https://github.com/user-attachments/assets/56d75091-4f26-4fa6-8192-f1d64f5575b9">
 
   2. Saving the application Data in DB
 
