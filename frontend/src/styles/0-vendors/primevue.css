@@ -1,0 +1,4 @@
+@import "/node_modules/primevue/resources/primevue.css" layer(vendor);
+@import "/node_modules/primevue/resources/themes/saga-blue/theme.css" layer(vendor);
+@import "/node_modules/primeflex/primeflex.css" layer(vendor);
+@import "/node_modules/primeicons/primeicons.css" layer(vendor);

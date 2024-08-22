@@ -1,0 +1,43 @@
+.audit {
+  &__panel-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    color: $color-navy;
+    font-weight: $font-weight-bold;
+    font-size: $font-xl;
+  }
+
+  &__grid {
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+
+    color: $color-navy;
+    font-weight: $font-weight-normal;
+    font-size: $font-md;
+  }
+
+  &__col-heading {
+    align-self: center;
+
+    font-weight: $font-weight-bold;
+  }
+
+  &__subheading {
+    grid-column: span 3;
+
+    font-weight: $font-weight-semi;
+    font-size: $font-lg;
+  }
+
+  &__label {
+    justify-self: end;
+    align-self: center;
+
+    font-weight: $font-weight-bold;
+    text-align: right;
+  }
+}

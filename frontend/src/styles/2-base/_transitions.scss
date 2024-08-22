@@ -1,0 +1,98 @@
+:root {
+  --transition-timing: 0.15s;
+}
+
+.fade-leave-active {
+  transition: opacity var(--transition-timing) ease;
+}
+
+.fade-enter-active {
+  transition: opacity var(--transition-timing) ease var(--transition-timing);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+  position: absolute;
+
+  width: 100%;
+
+  transition: all var(--transition-timing) ease-out;
+}
+
+.slide-right-enter-to {
+  position: absolute;
+
+  width: 100%;
+
+  transform: translateX(0);
+}
+
+.slide-right-enter-from {
+  position: absolute;
+
+  width: 100%;
+
+  transform: translateX(100%);
+}
+
+.slide-right-leave-to {
+  position: absolute;
+
+  width: 100%;
+
+  transform: translateX(-100%);
+}
+
+.slide-right-leave-from {
+  position: absolute;
+
+  width: 100%;
+
+  transform: translateX(0);
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  position: absolute;
+
+  width: 100%;
+
+  transition: all var(--transition-timing) ease-out;
+}
+
+.slide-left-enter-to {
+  position: absolute;
+
+  width: 100%;
+
+  transform: translateX(0);
+}
+
+.slide-left-enter-from {
+  position: absolute;
+
+  width: 100%;
+
+  transform: translateX(-100%);
+}
+
+.slide-left-leave-to {
+  position: absolute;
+
+  width: 100%;
+
+  transform: translateX(100%);
+}
+
+.slide-left-leave-from {
+  position: absolute;
+
+  width: 100%;
+
+  transform: translateX(0);
+}

@@ -1,0 +1,117 @@
+@use "sass:string";
+@use "sass:map";
+
+// Bridgit brand colors
+$color-navy: #0c1744; // Cetacean Blue
+$color-navy-75: #72768f;
+$color-navy-50: #858aa1;
+$color-navy-25: #c2c5d0;
+$color-navy-10: #e7e8ed;
+$color-navy-05: #f3f3f6;
+
+$color-emerald: #2cdd80; // UFO Green
+$color-emerald-50: #95edbf;
+$color-emerald-25: #caf6df;
+
+$color-green: #02864e; // Philippine Green
+$color-green-50: #80c2a6;
+$color-green-25: #bfe0d2;
+$color-green-10: #e6f3ed;
+
+$color-light-green: #defce7; // Nyanza
+$color-light-green-50: #eefdf2;
+$color-light-green-25: #f6fef9;
+
+$color-dark-green: #093824;
+$color-dark-green-50: #839b91;
+$color-dark-green-25: #c1cdc8;
+
+$color-grey: #333132;
+$color-grey-50: #989798;
+$color-grey-25: #cccbcb;
+
+$color-pink: #ffbcbd; // Light Pink
+$color-pink-50: #fdd;
+$color-pink-25: #fee;
+$color-pink-10: #fff8f8;
+
+$color-blue: #a4bfe0; // Pale Cerulean
+$color-blue-50: #d1deef;
+$color-blue-25: #e8eff7;
+$color-blue-10: #f6f9fc;
+
+$colors: (
+  "grey": (
+    "50": #f8fafc,
+    "100": #f1f5f9,
+    "200": #e2e8f0,
+    "300": #cbd5e1,
+    "400": #94a3b8,
+    "500": #64748b,
+    "600": #475569,
+    "700": #334155,
+    "800": #1e293b,
+    "900": #0f172a,
+  ),
+  "green": (
+    "50": #edfff7,
+    "100": #defce7,
+    "200": #acffdb,
+    "300": #6bffc2,
+    "400": #24ffa1,
+    "500": #2cdd80,
+    "600": #00c768,
+    "700": #009b54,
+    "800": #02864e,
+    "900": #04633d,
+    "950": #00381f,
+  ),
+  "pink": (
+    "50": #fffafa,
+    "100": #fff0f0,
+    "200": #ffe0e1,
+    "300": #ffd1d2,
+    "400": #ffbcbd,
+    "500": #ffa3a5,
+    "600": #ff8a8c,
+    "700": #ff5c5f,
+    "800": #fa0004,
+    "900": #b80003,
+    "950": #850002,
+  ),
+  "blue": (
+    "50": #f0f4fa,
+    "100": #e1eaf5,
+    "200": #c2d4ea,
+    "300": #a4bfe0,
+    "400": #7aa1d2,
+    "500": #4c81c2,
+    "600": #3666a0,
+    "700": #274972,
+    "800": #0c1744,
+    "900": #040716,
+    "950": #02040d,
+  ),
+);
+
+@function color($name) {
+  $dash: string.index($name, "-");
+  $color: string.slice($name, 1, $dash - 1);
+  $index: string.slice($name, $dash + 1);
+
+  @return map.get($colors, $color, $index);
+}
+
+$colors-theme: (
+  primary: color(green-500),
+  secondary: color(blue-400),
+  success: color(green-800),
+  error: color(pink-900),
+  warning: color(yellow-400),
+  info: color(blue-300),
+  link: color(green-600),
+);
+
+@function theme-color($theme) {
+  @return map.get($colors-theme, $theme);
+}

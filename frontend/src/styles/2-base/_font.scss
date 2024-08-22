@@ -1,0 +1,34 @@
+@font-face {
+  font-weight: 400;
+  font-family: Gordita;
+  font-style: normal;
+  src: url("/fonts/Gordita/Gordita-Regular.woff2") format("woff2");
+  font-display: auto;
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: Gordita;
+  font-style: normal;
+  src: url("/fonts/Gordita/Gordita-Medium.woff2") format("woff2");
+  font-display: auto;
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: Gordita;
+  font-style: normal;
+  src: url("/fonts/Gordita/Gordita-Bold.woff2") format("woff2");
+  font-display: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+
+  font-weight: $font-weight-semi;
+}

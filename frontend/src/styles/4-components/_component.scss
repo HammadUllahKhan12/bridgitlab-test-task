@@ -1,0 +1,34 @@
+.is-readonly {
+  --input-bg: #{$color-navy-05};
+  --input-text: #{$color-navy-75};
+  --icon-bg: #{$color-navy-05};
+  --icon-fg: #{$color-navy-75};
+}
+
+.is-disabled {
+  --input-bg: #{$color-navy-05};
+  --input-text: #{$color-navy-25};
+  --icon-bg: #{$color-navy-05};
+  --icon-fg: #{$color-navy-25};
+}
+
+.is-success {
+  --input-bg: #{$color-success-bg};
+  --input-border: #{$color-success-border};
+  --input-border-focus: #{$color-green};
+  --icon-bg: #{$color-success-bg};
+}
+
+.is-danger {
+  --input-bg: #{$color-danger-bg};
+  --input-border: #{$color-danger-border};
+  --input-border-focus: #{color(pink-600)};
+  --icon-bg: #{$color-danger-bg};
+}
+
+.is-dark {
+  --input-border: #{$color-dark-border} !important;
+  --input-border-focus: #{$color-dark-border};
+  --icon-bg: #{$color-dark-bg};
+  --icon-fg: #{$color-white};
+}

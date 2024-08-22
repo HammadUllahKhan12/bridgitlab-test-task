@@ -1,0 +1,137 @@
+image: atlassian/default-image:4
+options:
+  size: 2x
+pipelines:
+  default:
+    - parallel:
+      - step:
+          name: 'Source code lint issues'
+          script:
+            - npm ci --no-audit --include=dev
+            - npm run lint:ci 
+      - step:
+          name: 'Run migration'
+          services:
+            - postgres
+          script:
+            - export DATABASE_URL="postgres://user:password@localhost:5432/testdb"
+            - export NODE_ENV=dev
+            - if [ -z $BITBUCKET_BRANCH ]; then export BITBUCKET_BRANCH=`git rev-parse --abbrev-ref HEAD`; fi;
+            - npm ci --no-audit --include=dev
+            # - git clone git@bitbucket.org:bridgit-tech/techlend-be.git /tmp/techlend-be
+            # - cd /tmp/techlend-be
+            # - if [ `git show-ref --quiet refs/heads/$BITBUCKET_BRANCH` ]; then git checkout $BITBUCKET_BRANCH; fi
+            # - export TECHLEND_BE_BRANCH=`git rev-parse --abbrev-ref HEAD`
+            # - npm ci --no-audit --include=dev
+            # - npm run build
+            # - echo "Using techlend-be branch $TECHLEND_BE_BRANCH / database branch $BITBUCKET_BRANCH"
+            # - cd $OLDPWD
+            # - npm install /tmp/techlend-be
+            - npm run build
+            - npm run migrate
+            - npm run seed:all
+  branches:
+    dev:
+      - step:
+          deployment: dev
+          script:
+            - if [ -z $BITBUCKET_BRANCH ]; then export BITBUCKET_BRANCH=`git rev-parse --abbrev-ref HEAD`; fi;
+            - npm ci --no-audit --include=dev
+            # - git clone git@bitbucket.org:bridgit-tech/techlend-be.git /tmp/techlend-be
+            # - cd /tmp/techlend-be
+            # - if [ `git show-ref --quiet refs/heads/$BITBUCKET_BRANCH` ]; then git checkout $BITBUCKET_BRANCH; fi
+            # - export TECHLEND_BE_BRANCH=`git rev-parse --abbrev-ref HEAD`
+            # - echo "Using techlend-be branch $TECHLEND_BE_BRANCH / database branch $BITBUCKET_BRANCH"
+            # - cd $OLDPWD
+            # - npm install /tmp/techlend-be
+            - npm run build
+            - rm -rf node_modules
+            - npm ci --omit=dev
+            # - npm install /tmp/techlend-be --omit=dev
+            - rm -rf .git
+            # - rm -rf node_modules/techlend-be/.git
+            # - rm -rf node_modules/techlend-be/docs
+            - rm -rf node_modules/@types
+            - rm -rf node_modules/@typescript-eslint
+            - rm -rf node_modules/eslint*
+            - zip -r code.zip ./dist ./node_modules index.js package.json package-lock.json
+            - pipe: atlassian/aws-lambda-deploy:1.8.2
+              variables:
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+                FUNCTION_NAME: 'database-migration-dev'
+                COMMAND: 'update'
+                ZIP_FILE: 'code.zip'
+    uat:
+      - step:
+          deployment: uat
+          script:
+            - if [ -z $BITBUCKET_BRANCH ]; then export BITBUCKET_BRANCH=`git rev-parse --abbrev-ref HEAD`; fi;
+            - npm ci --no-audit --include=dev
+            # - git clone git@bitbucket.org:bridgit-tech/techlend-be.git /tmp/techlend-be
+            # - cd /tmp/techlend-be
+            # - if [ `git show-ref --quiet refs/heads/$BITBUCKET_BRANCH` ]; then git checkout $BITBUCKET_BRANCH; fi
+            # - export TECHLEND_BE_BRANCH=`git rev-parse --abbrev-ref HEAD`
+            # - echo "Using techlend-be branch $TECHLEND_BE_BRANCH / database branch $BITBUCKET_BRANCH"
+            # - cd $OLDPWD
+            # - npm install /tmp/techlend-be
+            - npm run build
+            - rm -rf node_modules
+            - npm ci --omit=dev
+            # - npm install /tmp/techlend-be --omit=dev
+            - rm -rf .git
+            # - rm -rf node_modules/techlend-be/.git
+            # - rm -rf node_modules/techlend-be/docs
+            - rm -rf node_modules/@types
+            - rm -rf node_modules/@typescript-eslint
+            - rm -rf node_modules/eslint*
+            - zip -r code.zip ./dist ./node_modules index.js package.json package-lock.json
+            - pipe: atlassian/aws-lambda-deploy:1.8.2
+              variables:
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+                FUNCTION_NAME: 'database-migration-uat'
+                COMMAND: 'update'
+                ZIP_FILE: 'code.zip'
+    main:
+      - step:
+          deployment: prod
+          script:
+            - if [ -z $BITBUCKET_BRANCH ]; then export BITBUCKET_BRANCH=`git rev-parse --abbrev-ref HEAD`; fi;
+            - npm ci --no-audit --include=dev
+            # - git clone git@bitbucket.org:bridgit-tech/techlend-be.git /tmp/techlend-be
+            # - cd /tmp/techlend-be
+            # - if [ `git show-ref --quiet refs/heads/$BITBUCKET_BRANCH` ]; then git checkout $BITBUCKET_BRANCH; fi
+            # - export TECHLEND_BE_BRANCH=`git rev-parse --abbrev-ref HEAD`
+            # - echo "Using techlend-be branch $TECHLEND_BE_BRANCH / database branch $BITBUCKET_BRANCH"
+            # - cd $OLDPWD
+            # - npm install /tmp/techlend-be
+            - npm run build
+            - rm -rf node_modules
+            - npm ci --omit=dev
+            # - npm install /tmp/techlend-be --omit=dev
+            - rm -rf .git
+            # - rm -rf node_modules/techlend-be/.git
+            # - rm -rf node_modules/techlend-be/docs
+            - rm -rf node_modules/@types
+            - rm -rf node_modules/@typescript-eslint
+            - rm -rf node_modules/eslint*
+            - zip -r code.zip ./dist ./node_modules index.js package.json package-lock.json
+            - pipe: atlassian/aws-lambda-deploy:1.8.2
+              variables:
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+                FUNCTION_NAME: 'database-migration-prod'
+                COMMAND: 'update'
+                ZIP_FILE: 'code.zip'
+definitions:
+  services:
+    postgres:
+      image: postgres
+      environment:
+        POSTGRES_DB: 'testdb'
+        POSTGRES_PASSWORD: 'password'
+        POSTGRES_USER: 'user'

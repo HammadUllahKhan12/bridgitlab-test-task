@@ -1,0 +1,62 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:color";
+
+@function map-color($group, $color) {
+  @return map.get($group, $color);
+}
+
+@function to-rgb($color) {
+  @return color.red($color), color.green($color), color.blue($color);
+}
+
+@function color-luminance($color) {
+  @if type-of($color) != "color" {
+    @return 0.55;
+  }
+
+  /* stylelint-disable-next-line order/order */
+  $color-rgb: (
+    "red": color.red($color),
+    "green": color.green($color),
+    "blue": color.blue($color),
+  );
+
+  @each $name, $value in $color-rgb {
+    $value: math.div($value, 255);
+
+    @if $value <= 0.04045 {
+      $value: math.div($value, 12.92);
+    } @else {
+      $value: math.div(($value + 0.055), 1.055);
+      $value: math.pow($value, 2.4);
+    }
+
+    /* stylelint-disable-next-line order/order */
+    $color-rgb: map.merge(
+      $color-rgb,
+      (
+        $name: $value,
+      )
+    );
+  }
+
+  /* stylelint-disable-next-line order/order */
+  $red: map.get($color-rgb, "red") * 0.2126;
+  $green: map.get($color-rgb, "green") * 0.7152;
+  $blue: map.get($color-rgb, "blue") * 0.0722;
+
+  @return $red + $green + $blue;
+}
+
+@function color-invert($color) {
+  @if color-luminance($color) > 0.55 or $color == transparent {
+    @return rgba(#000, 0.7);
+  }
+
+  @return #fff;
+}
+
+@function box-shadow-border($color, $width: 1) {
+  @return inset 0 0 0 (1px * $width) $color;
+}

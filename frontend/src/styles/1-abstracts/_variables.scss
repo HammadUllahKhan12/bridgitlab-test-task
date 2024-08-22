@@ -1,0 +1,45 @@
+// font
+$font-size-base: 16px;
+
+$font-xs: 0.625rem;
+$font-sm: 0.75rem;
+$font-md: 0.875rem;
+$font-lg: 1rem;
+$font-xl: 1.25rem;
+$font-2xl: 3.5rem;
+$font-3xl: 4rem;
+
+$font-weight-normal: 400;
+$font-weight-semi: 500;
+$font-weight-bold: 700;
+
+$body-font: "Gordita", sans-serif;
+
+$border-radius-sm: 0.25rem;
+$border-radius: 0.375rem;
+$border-radius-lg: 0.5rem;
+
+// Colors
+$color-white: #fff;
+
+$color-primary: $color-emerald;
+$color-secondary: $color-navy;
+
+$color-border: $color-navy-25;
+$color-border-focus: $color-navy;
+$color-text: $color-navy;
+
+$color-success-bg: $color-green-10;
+$color-success-border: $color-green-50;
+$color-danger-bg: $color-pink-25;
+$color-danger-border: $color-pink;
+$color-info-bg: $color-navy-05;
+$color-info-border: $color-navy-25;
+$color-dark-bg: $color-navy;
+$color-dark-border: $color-white;
+
+// legacy colours
+$color-grey: rgba(2, 0, 56, 0.3);
+
+// Components
+$input-height: 2.5rem;

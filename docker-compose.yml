@@ -1,0 +1,10 @@
+version: "3.2"
+services:
+  technical_test_db:
+    image: postgres
+    ports: 
+     - 5436:5432
+    environment:
+      POSTGRES_DB: "technical_test"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_USER: "user"

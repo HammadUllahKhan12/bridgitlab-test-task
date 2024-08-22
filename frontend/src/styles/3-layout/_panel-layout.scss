@@ -1,0 +1,94 @@
+.panel-grid {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  align-items: end;
+
+  padding: 0.5rem;
+
+  label {
+    display: block;
+
+    margin-bottom: 0.25rem;
+
+    color: $color-navy;
+    font-weight: $font-weight-normal;
+    font-size: $font-md;
+  }
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  align-items: end;
+
+  padding: 0.5rem;
+
+  > div {
+    position: relative;
+  }
+
+  label {
+    display: block;
+
+    margin-bottom: 0.25rem;
+
+    color: $color-navy;
+    font-weight: $font-weight-normal;
+    font-size: $font-md;
+  }
+
+  .symbol {
+    position: absolute;
+    bottom: 0.55em;
+    right: -1rem;
+
+    width: 1rem;
+
+    text-align: center;
+  }
+
+  .dlg-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-self: end;
+
+    margin-top: 1rem;
+  }
+}
+
+.paired-items {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  > div {
+    flex-basis: 50%;
+  }
+}
+
+.label {
+  display: block;
+
+  margin-bottom: 0.25rem;
+
+  color: $color-navy;
+  font-weight: $font-weight-normal;
+  font-size: $font-md;
+}
+
+.divider {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+
+  border-top: 1px solid $color-navy-25;
+}
+
+@for $i from 1 through 6 {
+  .span-#{$i} {
+    grid-column: span $i;
+  }
+}

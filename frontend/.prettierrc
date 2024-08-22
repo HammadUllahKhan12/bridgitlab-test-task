@@ -1,0 +1,21 @@
+{
+  "endOfLine": "auto",
+  "printWidth": 120,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "*.scss",
+      "options": {
+        "printWidth": 200,
+      }
+    },
+    {
+      "files": "SvgSprites.vue",
+      "options": {
+        "printWidth": 5000,
+      }
+    }
+  ]
+}

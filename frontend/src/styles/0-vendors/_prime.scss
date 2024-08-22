@@ -1,0 +1,76 @@
+.p-component {
+  font-family: Gordita, sans-serif;
+}
+
+.p-inputtext {
+  width: 100%;
+
+  color: $color-text;
+}
+
+.p-dropdown {
+  width: 100%;
+}
+
+input.p-inputtext {
+  border: 1px solid var(--input-border);
+
+  &:hover {
+    --input-border: #{$color-border-focus};
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.p-panel .p-panel-content {
+  border: unset;
+}
+
+.p-datatable {
+  &-tbody > tr:hover {
+    background-color: $color-light-green;
+  }
+
+  &-thead {
+    border-bottom: 0.25rem solid #fff;
+  }
+}
+
+.p-dialog {
+  border-radius: $border-radius;
+
+  &-header {
+    padding: 0.75rem 1rem;
+
+    font-weight: $font-weight-bold;
+
+    border-radius: $border-radius $border-radius 0 0;
+
+    background-color: $color-light-green;
+  }
+
+  &-content {
+    padding: 0 0.5rem 0.5rem;
+  }
+}
+
+.p-autocomplete {
+  &.p-disabled {
+    background-color: $color-navy-05;
+
+    opacity: 1;
+
+    .p-autocomplete-input {
+      color: $color-navy-50;
+      font-family: Gordita, sans-serif !important;
+
+      border-color: $color-navy-25;
+
+      background-color: transparent;
+
+      opacity: 1;
+    }
+  }
+}
