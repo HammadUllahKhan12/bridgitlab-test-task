@@ -90,12 +90,17 @@ Commit your code to your personal git and share the link with us.
 ## Screenshots
 
   1. Application Modal
-    
+
+    <img width="1680" alt="image" src="https://github.com/user-attachments/assets/7ebd3dea-eeea-4941-a607-99e9452ed0e2">
+
   
   2. Saving the application Data in DB
 
+    <img width="1680" alt="image" src="https://github.com/user-attachments/assets/71ffb4ab-da65-403e-8d68-31c984bbbabe">
 
   3. Validations on modal
+
+    ![Uploading image.png…]()
 
 
   
